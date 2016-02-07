@@ -27,6 +27,10 @@ void FaBoGPIO::setDigital(int port, int output)
 
 }
 
+void FaBoGPIO::setGPIO(byte output){
+  writeI2c(PCAL6408_OUTPUT_REG, output);
+}
+
 void FaBoGPIO::setAllClear()
 {
   writeI2c(PCAL6408_OUTPUT_REG, 0x00);

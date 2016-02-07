@@ -38,6 +38,7 @@ public:
   void configuration(void);
   void setDigital(int port, int output);
   void setAllClear();
+  void setGPIO(byte output);
 private:
   byte gpio_output = 0x00;
   void readI2c(byte register_addr, int num, byte *buf);
