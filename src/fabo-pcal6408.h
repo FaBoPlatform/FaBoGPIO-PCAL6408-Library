@@ -1,0 +1,46 @@
+#include "Arduino.h"
+#include "Wire.h"
+
+#define PCAL6408_SLAVE_ADDRESS (0x20)
+
+#define PCAL6408_OUTPUT_REG 0x01
+#define PCAL6408_CONFIGURATION_REG 0x03
+
+#define PCAL6408_IO0_OUTPUT 0b00000000
+#define PCAL6408_IO0_INPUT 0b00000001
+#define PCAL6408_IO1_OUTPUT 0b00000000
+#define PCAL6408_IO1_INPUT 0b00000010
+#define PCAL6408_IO2_OUTPUT 0b00000000
+#define PCAL6408_IO2_INPUT 0b00000100
+#define PCAL6408_IO3_OUTPUT 0b00000000
+#define PCAL6408_IO3_INPUT 0b00001000
+#define PCAL6408_IO4_OUTPUT 0b00000000
+#define PCAL6408_IO4_INPUT 0b00010000
+#define PCAL6408_IO5_OUTPUT 0b00000000
+#define PCAL6408_IO5_INPUT 0b00100000
+#define PCAL6408_IO6_OUTPUT 0b00000000
+#define PCAL6408_IO6_INPUT 0b01000000
+#define PCAL6408_IO7_OUTPUT 0b00000000
+#define PCAL6408_IO7_INPUT 0b10000000
+
+#define PCAL6408_IO0 0b00000001
+#define PCAL6408_IO1 0b00000010
+#define PCAL6408_IO2 0b00000100
+#define PCAL6408_IO3 0b00001000
+#define PCAL6408_IO4 0b00010000
+#define PCAL6408_IO5 0b00100000
+#define PCAL6408_IO6 0b01000000
+#define PCAL6408_IO7 0b10000000
+
+class FaBoGPIO
+{
+public:
+  void configuration(void);
+  void setDigital(int port, int output);
+  void setAllClear();
+private:
+  byte gpio_output = 0x00;
+  void readI2c(byte register_addr, int num, byte *buf);
+  void writeI2c(byte register_addr, byte value);
+};
+
