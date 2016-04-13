@@ -1,5 +1,14 @@
+/**
+ * @file  fabo-pcal6408.cpp
+ * @brief fabo libtary of PCAl6408
+ * @author Akira Sasaki
+ * @date 2,10, 2016
+ */
 #include "fabo-pcal6408.h"
 
+/**
+ * @brief set config
+ */
 void FaBoGPIO::configuration()
 {
 
@@ -15,6 +24,11 @@ void FaBoGPIO::configuration()
     writeI2c(PCAL6408_CONFIGURATION_REG, conf);
 }
 
+/**
+ * @brief Set Digital Data
+ * @param [in] port   : set IO port
+ * @param [in] output : set value
+ */
 void FaBoGPIO::setDigital(int port, int output)
 {
 
@@ -27,41 +41,56 @@ void FaBoGPIO::setDigital(int port, int output)
 
 }
 
-void FaBoGPIO::setGPIO(byte output){
-  writeI2c(PCAL6408_OUTPUT_REG, output);
-}
-
+/**
+ * @brief Clear All Port
+ */
 void FaBoGPIO::setAllClear()
 {
   writeI2c(PCAL6408_OUTPUT_REG, 0x00);
   gpio_output = 0x00;
 }
 
-// I2Cへの書き込み
-void FaBoGPIO::writeI2c(byte register_addr, byte value) {
-  Wire.begin();       // I2Cの開始
-  Wire.beginTransmission(PCAL6408_SLAVE_ADDRESS);  
-  Wire.write(register_addr);         
-  Wire.write(value);                 
-  Wire.endTransmission();        
+/**
+ * @brief Set GPIO
+ * @param [in] output : set value
+ */
+void FaBoGPIO::setGPIO(byte output){
+  writeI2c(PCAL6408_OUTPUT_REG, output);
 }
 
-// I2Cへの読み込み
-void FaBoGPIO::readI2c(byte register_addr, int num, byte buffer[]) {
-  Wire.begin();       // I2Cの開始
-  Wire.beginTransmission(PCAL6408_SLAVE_ADDRESS); 
-  Wire.write(register_addr);           
-  Wire.endTransmission();         
+/**
+ * @brief Write I2C Data
+ * @param [in] address : Write Register Address
+ * @param [in] data    : Write Data
+ */
+void FaBoGPIO::writeI2c(byte register_addr, byte value) {
+  Wire.begin();
+  Wire.beginTransmission(PCAL6408_SLAVE_ADDRESS);
+  Wire.write(register_addr);
+  Wire.write(value);
+  Wire.endTransmission();
+}
 
-  Wire.beginTransmission(PCAL6408_SLAVE_ADDRESS); 
-  Wire.requestFrom(PCAL6408_SLAVE_ADDRESS, num);   
+/**
+ * @brief Read I2C Data
+ * @param [in] register_addr : register address
+ * @param [in] num       : Data Length
+ * @param [out] buffer[] : Read Data
+ */
+void FaBoGPIO::readI2c(byte register_addr, int num, byte buffer[]) {
+  Wire.begin();
+  Wire.beginTransmission(PCAL6408_SLAVE_ADDRESS);
+  Wire.write(register_addr);
+  Wire.endTransmission();
+
+  Wire.beginTransmission(PCAL6408_SLAVE_ADDRESS);
+  Wire.requestFrom(PCAL6408_SLAVE_ADDRESS, num);
 
   int i = 0;
-  while(Wire.available())        
-  { 
-    buffer[i] = Wire.read();   
+  while(Wire.available())
+  {
+    buffer[i] = Wire.read();
     i++;
   }
-  Wire.endTransmission();         
+  Wire.endTransmission();
 }
-
