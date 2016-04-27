@@ -1,12 +1,28 @@
-#include "fabo-pcal6408.h"
-#include "Wire.h"
+/**
+ @file LED.ino
+ @brief This is an Example for the FaBo GPIO I2C Brick.
+
+   http://fabo.io/210.html
+
+   Released under APACHE LICENSE, VERSION 2.0
+
+   http://www.apache.org/licenses/
+
+ @author FaBo<info@fabo.io>
+*/
+
+#include <Wire.h>
+#include <FaBoGPIO_PCAL6408.h>
 
 FaBoGPIO faboGPIO;
 int i = 0;
 
 void setup() {
-  faboGPIO.configuration();
   Serial.begin(9600);
+  Serial.println("RESET");
+  Serial.println();
+
+  faboGPIO.configuration();
 }
 
 void loop() {

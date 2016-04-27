@@ -1,21 +1,23 @@
 # FaBoGPIO-PCAL6408-Library
 
-# FaBoGPIO
+This is a library for FaBo #210 GPIO I2C Brick.
 
-This is a library for FaBo GPIO Brick.
+## FaBo GPIO I2C Brick
 
-# PCAL6408
+[#210 GPIO I2C Brick](http://fabo.io/210.html)
 
-PCAL6408 is gpio expander.
+## PCAL6408A
 
-# Datasheet
+PCAL6408A is 8bit I2C I/O expander.
 
-[PCAL6408 Datasheet](http://www.nxp.com/documents/data_sheet/PCAL6408A.pdf)
+### PCAL6408A Datasheet
 
-# Releases
+[PCAL6408A Datasheet](http://www.nxp.com/documents/data_sheet/PCAL6408A.pdf)
 
-1.0.0 Initial release.
+## Releases
 
-# How to install.
+- 1.0.0 Initial release.
 
-[Installing Additional Arduino Libraries](https://www.arduino.cc/en/Guide/Libraries#toc3)
+# How to install
+
+[Installing Additional Arduino Libraries](https://www.arduino.cc/en/Guide/Libraries)
